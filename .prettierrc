@@ -1,0 +1,17 @@
+{
+    "endOfLine": "lf",
+    "semi": false,
+    "singleQuote": true,
+    "tabWidth": 4,
+    "trailingComma": "es5",
+    "jsxBracketSameLine": true,
+    "htmlWhitespaceSensitivity": "css",
+    "overrides": [
+        {
+            "files": "*.css",
+            "options": {
+                "tabWidth": 2
+            }
+        }
+    ]
+}

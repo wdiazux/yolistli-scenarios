@@ -1,0 +1,31 @@
+{
+  "compilerOptions": {
+    "module": "commonjs",
+    "target": "es5",
+    "baseUrl": "./",
+    "moduleResolution": "node",
+    "sourceMap": true,
+    "removeComments": true,
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "allowJs": true,
+    "outDir": "./common/dist/",
+    "lib": [
+      "es5",
+      "scripthost",
+      "dom"
+    ],
+    "typeRoots": [
+      "./node_modules/@types",
+    ]
+  },
+  "include": [
+    "./common/src/**/*"
+  ],
+  "exclude": [
+    "node_modules",
+    "common/dist",
+    "scenarios",
+    "configs"
+  ],
+}
