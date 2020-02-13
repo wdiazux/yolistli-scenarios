@@ -2,7 +2,7 @@
 const path = require('path')
 
 module.exports = {
-    publicPath: '/',
+    publicPath: path.resolve(__dirname, '../'),
     root: path.resolve(__dirname, '../'),
     context: path.resolve(__dirname, '../', 'common/src'),
     scenarios: path.resolve(__dirname, '../', 'scenarios/cihuatan'),

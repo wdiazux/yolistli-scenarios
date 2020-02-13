@@ -8,6 +8,7 @@ import {
     StandardMaterial,
     Nullable,
 } from 'babylonjs'
+import createFragment from './tools/createFragment'
 
 export class Init {
     private _canvas: Nullable<HTMLCanvasElement>
@@ -160,15 +161,64 @@ export class Init {
                     'Streaming items...' +
                     (remaining ? remaining + ' remaining' : '')
 
-                if (remaining === 0) {
-                    this._sceneChecked = true
-                }
+                if (remaining === 0) this._sceneChecked = true
             }
+
+            // create panel with option buttons for camera
+            this.createPanel()
 
             // the canvas/window resize event handler
             window.addEventListener('resize', () => {
                 this._engine.resize()
             })
         }
+    }
+
+    private hideCameraPanel = (): void => {
+        //cameraPanelIsClosed = true
+        //cameraPanel.style.webkitTransform = 'translateX(17em)'
+        //cameraPanel.style.transform = 'translateX(17em)'
+    }
+
+    private switchCamera = camera => {
+        const activeCamera = this._scene.activeCamera as any
+        if ('rotation' in activeCamera) {
+            // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+            camera.rotation = activeCamera.rotation.clone()
+        }
+        camera.fov = activeCamera.fov
+        camera.minZ = activeCamera.minZ
+        camera.maxZ = activeCamera.maxZ
+
+        if ('ellipsoid' in this._scene.activeCamera) {
+            camera.ellipsoid = (this._scene
+                .activeCamera as any).ellipsoid.clone()
+        }
+        camera.checkCollisions = (this._scene
+            .activeCamera as any).checkCollisions
+        camera.applyGravity = activeCamera.applyGravity
+
+        camera.speed = activeCamera.speed
+
+        camera.postProcesses = activeCamera.postProcesses
+        activeCamera.postProcesses = []
+        activeCamera.detachControl(this._canvas)
+        if (this._scene.activeCamera.dispose) activeCamera.dispose()
+
+        this._scene.activeCamera = camera
+
+        this._scene.activeCamera.attachControl(this._canvas)
+    }
+
+    private createPanel = () => {
+        const container = this._canvas.parentNode
+
+        const buttonElements: DocumentFragment = createFragment(`
+            <button>Desktop Environment</button>
+            <button>Mobile Environment</button>
+            <button>VR Environment</button>
+        `)
+
+        container.append(buttonElements)
     }
 }

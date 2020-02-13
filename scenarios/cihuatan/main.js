@@ -1,7 +1,6 @@
 window.addEventListener('DOMContentLoaded', function() {
     axios.get('settings.json')
     .then(function(response) {
-        console.log(Yolistli);
         const yolistli = new Yolistli.Init(
             'renderCanvas',
             response.data.name,
@@ -9,6 +8,7 @@ window.addEventListener('DOMContentLoaded', function() {
             response.data.mode,
             response.data.startPoint,
             response.data.startRotation,
+            response.data.offline,
         );
 
         // Create the scene
