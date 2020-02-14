@@ -1,5 +1,7 @@
 $mdc-theme-primary: #e82041;
 $fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
+$roboto-font-path: '~roboto-fontface/fonts';
+@import 'roboto-fontface/css/roboto/sass/roboto-fontface-regular';
 @import '@material/button/mdc-button';
 @import '@fortawesome/fontawesome-pro/scss/fontawesome';
 @import '@fortawesome/fontawesome-pro/scss/regular';
@@ -11,6 +13,10 @@ body {
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+body {
+    font-family: Helvetica, Arial, sans-serif;
 }
 
 #renderCanvas {

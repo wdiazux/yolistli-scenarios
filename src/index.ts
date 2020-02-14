@@ -250,9 +250,7 @@ export class Init {
     }
 
     private hideOverlay = () => {
-        console.log('hide')
         const overlay: HTMLElement = document.querySelector('#scene-overlay')
-        console.log(overlay)
         if (overlay) overlay.style.display = 'none'
     }
 
