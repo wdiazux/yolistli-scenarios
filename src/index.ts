@@ -12,10 +12,10 @@ import {
 } from 'babylonjs'
 import 'babylonjs-loaders'
 import 'babylonjs-inspector'
-import 'ua-parser-js'
+import { UAParser } from 'ua-parser-js'
 import createFragment from './tools/createFragments'
 import { MDCRipple } from '@material/ripple'
-import './styles/panel.scss'
+import './styles/style.scss'
 
 type Cameras = Nullable<
     UniversalCamera | VirtualJoysticksCamera | VRDeviceOrientationFreeCamera
@@ -198,6 +198,9 @@ export class Init {
             // create panel with option buttons for camera
             this.createPanel()
 
+            // create overlay
+            this.createOverlay()
+
             // the canvas/window resize event handler
             window.addEventListener('resize', () => {
                 this._engine.resize()
@@ -235,6 +238,22 @@ export class Init {
         this._scene.activeCamera = camera
 
         this._scene.activeCamera.attachControl(this._canvas)
+    }
+
+    private createOverlay = () => {
+        const container = this._canvas.parentNode
+        const overlay = document.createElement('div')
+        overlay.id = 'scene-overlay'
+        if (container) {
+            container.append(overlay)
+        }
+    }
+
+    private hideOverlay = () => {
+        console.log('hide')
+        const overlay: HTMLElement = document.querySelector('#scene-overlay')
+        console.log(overlay)
+        if (overlay) overlay.style.display = 'none'
     }
 
     private createPanel = () => {
@@ -277,14 +296,34 @@ export class Init {
             MDCRipple.attachTo(elm)
         })
 
-        // listeners
-        // ---------
+        // declare buttons
+        const deskBtn: HTMLButtonElement = document.querySelector('#desk-btn')
+        const mobBtn: HTMLButtonElement = document.querySelector('#mob-btn')
+        const vrBtn: HTMLButtonElement = document.querySelector('#vr-btn')
+        const debugBtn: HTMLButtonElement = document.querySelector(
+            '#debug-button'
+        )
+
+        // detect device and browser
+        const uaParser = new UAParser()
+        const isMobile = uaParser.getDevice().type
+
+        if (isMobile === 'mobile' || isMobile === 'tablet') {
+            deskBtn.style.display = 'none'
+            debugBtn.style.display = 'none'
+        } else {
+            mobBtn.style.display = 'none'
+        }
+
+        // listeners for buttons
+        // ---------------------
 
         // desktop button camera
-        document.querySelector('#desk-btn').addEventListener('click', () => {
+        deskBtn.addEventListener('click', () => {
             if (!this._scene) return
 
             if (this._scene.activeCamera instanceof UniversalCamera) {
+                this.hideOverlay()
                 this.hideCameraPanel()
                 return
             }
@@ -295,12 +334,13 @@ export class Init {
                 this._scene
             )
 
+            this.hideOverlay()
             this.hideCameraPanel()
             this.switchCamera(camera)
         })
 
         // mobile button camera
-        document.querySelector('#mob-btn').addEventListener('click', () => {
+        mobBtn.addEventListener('click', () => {
             if (!this._scene) return
 
             if (this._scene.activeCamera instanceof VirtualJoysticksCamera) {
@@ -313,12 +353,13 @@ export class Init {
                 this._scene
             )
 
+            this.hideOverlay()
             this.hideCameraPanel()
             this.switchCamera(camera)
         })
 
         // VR button camera
-        document.querySelector('#vr-btn').addEventListener('click', () => {
+        vrBtn.addEventListener('click', () => {
             if (!this._scene) return
 
             if (
@@ -334,6 +375,7 @@ export class Init {
                 this._scene
             )
 
+            this.hideOverlay()
             this.hideCameraPanel()
             this.switchCamera(camera)
         })

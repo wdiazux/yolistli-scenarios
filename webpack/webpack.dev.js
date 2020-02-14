@@ -76,7 +76,7 @@ module.exports = {
     },
     plugins: [
         new MiniCssExtractPlugin({
-            filename: 'panel.css',
+            filename: 'yolistli.css',
         }),
         new CopyPlugin([
             {

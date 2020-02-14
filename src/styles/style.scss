@@ -1,5 +1,6 @@
-@import '@material/button/mdc-button';
+$mdc-theme-primary: #e82041;
 $fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
+@import '@material/button/mdc-button';
 @import '@fortawesome/fontawesome-pro/scss/fontawesome';
 @import '@fortawesome/fontawesome-pro/scss/regular';
 
@@ -29,6 +30,7 @@ body {
     bottom: 0;
     padding: 15px;
     min-width: 255px;
+    z-index: 1500;
     flex-direction: column;
     transform: translateX(-50%) translateY(100%);
     background: rgba($color: #fff, $alpha: 0.6);
@@ -57,6 +59,16 @@ body {
     font-style: inherit;
 }
 
+#scene-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    background: rgba(255, 255, 255, 0);
+}
+
 #debug-btn {
     position: absolute;
     padding: 10px;
@@ -68,6 +80,7 @@ body {
     border-radius: 50%;
     overflow: hidden;
     opacity: 0;
+    z-index: 1500;
     transition: opacity 0.5s ease;
 
     .mdc-button__ripple {

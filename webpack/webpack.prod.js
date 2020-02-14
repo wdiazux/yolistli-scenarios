@@ -65,7 +65,7 @@ module.exports = {
     plugins: [
         new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
-            filename: 'panel.css',
+            filename: 'yolistli.css',
         }),
         new CopyPlugin([
             {
