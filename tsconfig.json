@@ -2,30 +2,21 @@
   "compilerOptions": {
     "module": "commonjs",
     "target": "es5",
-    "baseUrl": "./",
-    "moduleResolution": "node",
     "sourceMap": true,
-    "removeComments": true,
+    "noImplicitAny": true,
+    "moduleResolution": "node",
     "resolveJsonModule": true,
     "esModuleInterop": true,
     "allowJs": true,
-    "outDir": "./common/dist/",
-    "lib": [
-      "es5",
-      "scripthost",
-      "dom"
-    ],
+    "outDir": "./dist/",
     "typeRoots": [
       "./node_modules/@types",
     ]
   },
-  "include": [
-    "./common/src/**/*"
-  ],
   "exclude": [
     "node_modules",
-    "common/dist",
+    "dist",
     "scenarios",
-    "configs"
+    "webpack"
   ],
 }

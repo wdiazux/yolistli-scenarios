@@ -1,0 +1,68 @@
+@import '@material/button/mdc-button';
+$fa-font-path: '~@fortawesome/fontawesome-pro/webfonts';
+@import '@fortawesome/fontawesome-pro/scss/fontawesome';
+@import '@fortawesome/fontawesome-pro/scss/regular';
+
+html,
+body {
+    overflow: hidden;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+#renderCanvas {
+    width: 100%;
+    height: 100%;
+    touch-action: none;
+}
+#panel {
+    display: flex;
+    position: absolute;
+    left: 50%;
+    bottom: 0;
+    padding: 15px;
+    min-width: 255px;
+    flex-direction: column;
+    transform: translateX(-50%) translateY(100%);
+    background: rgba($color: #fff, $alpha: 0.6);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    transition: transform 0.7s ease-in-out;
+
+    .mdc-button:not(:last-child) {
+        margin-bottom: 7px;
+    }
+    &.visible {
+        transform: translateX(-50%) translateY(0);
+    }
+    .far,
+    .fad {
+        margin-right: 10px;
+
+        &::after {
+            opacity: 1;
+        }
+    }
+}
+.far,
+.fad {
+    font-style: inherit;
+}
+#settings-btn {
+    position: absolute;
+    padding: 10px;
+    width: 50px;
+    height: 50px;
+    min-width: auto;
+    bottom: 10px;
+    left: 10px;
+    border-radius: 50%;
+    overflow: hidden;
+    opacity: 0;
+    transition: opacity 0.5s ease;
+
+    .mdc-button__ripple {
+        border-radius: 50%;
+    }
+}
