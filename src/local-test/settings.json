@@ -1,6 +1,6 @@
 {
     "name": "cihuatan",
-    "location": "https://wdiaz.org:8081/scenarios/cihuatan",
+    "location": "/src/local-test/model",
     "mode": "",
     "collision": true,
     "startPoint": [-11, 4, -20],

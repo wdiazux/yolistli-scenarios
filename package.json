@@ -56,6 +56,7 @@
     "cannon": "^0.6.2",
     "core-js": "^3.6.4",
     "normalize.css": "^8.0.1",
-    "pepjs": "^0.5.2"
+    "pepjs": "^0.5.2",
+    "ua-parser-js": "^0.7.21"
   }
 }

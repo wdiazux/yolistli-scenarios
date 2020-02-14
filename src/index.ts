@@ -10,7 +10,9 @@ import {
     VRDeviceOrientationFreeCamera,
     Nullable,
 } from 'babylonjs'
+import 'babylonjs-loaders'
 import 'babylonjs-inspector'
+import 'ua-parser-js'
 import createFragment from './tools/createFragments'
 import { MDCRipple } from '@material/ripple'
 import './styles/panel.scss'
@@ -129,6 +131,11 @@ export class Init {
         )
 
         // camera default settings
+        this._camera.rotation = new Vector3(
+            this._srotation[0],
+            this._srotation[1],
+            this._srotation[2]
+        )
         this._camera.speed = 0.4
         this._camera.inertia = 0.8
         this._camera.fov = 1.024779
@@ -163,7 +170,7 @@ export class Init {
 
             // show debug btn
             const debugBtn: HTMLButtonElement = document.querySelector(
-                '#settings-btn'
+                '#debug-btn'
             )
             if (debugBtn) debugBtn.style.opacity = '1'
 
@@ -255,7 +262,7 @@ export class Init {
         `)
 
         const settingBtn = document.createElement('button')
-        settingBtn.id = 'settings-btn'
+        settingBtn.id = 'debug-btn'
         settingBtn.className = 'mdc-button mdc-fab--extended mdc-button--raised'
         settingBtn.innerHTML = `<div class="mdc-button__ripple"></div>
         <span class="mdc-button__lable"><i class="far fa-cogs"></i></span>`
@@ -264,11 +271,14 @@ export class Init {
         container.append(buttonElements)
         if (this._debug) container.append(settingBtn)
 
-        // ripple effect for all buttons
+        // ripple effect aka material.io for all buttons
         const buttons = document.querySelectorAll('.mdc-button')
         buttons.forEach(elm => {
             MDCRipple.attachTo(elm)
         })
+
+        // listeners
+        // ---------
 
         // desktop button camera
         document.querySelector('#desk-btn').addEventListener('click', () => {
@@ -329,16 +339,14 @@ export class Init {
         })
 
         // open debug mode
-        document
-            .querySelector('#settings-btn')
-            .addEventListener('click', () => {
-                if (this._scene) {
-                    if (this._scene.debugLayer.isVisible()) {
-                        this._scene.debugLayer.hide()
-                    } else {
-                        this._scene.debugLayer.show()
-                    }
+        document.querySelector('#debug-btn').addEventListener('click', () => {
+            if (this._scene) {
+                if (this._scene.debugLayer.isVisible()) {
+                    this._scene.debugLayer.hide()
+                } else {
+                    this._scene.debugLayer.show()
                 }
-            })
+            }
+        })
     }
 }
