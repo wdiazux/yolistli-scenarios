@@ -2,14 +2,11 @@
   "*.{js,jsx,ts,tsx}": [
     "prettier --write --single--quote",
     "eslint --fix",
-    "git add"
   ],
   "*.scss": [
     "prettier --write",
-    "git add"
   ],
   "{*.{json,md,html}}": [
     "prettier --write",
-    "git add"
   ]
 }
