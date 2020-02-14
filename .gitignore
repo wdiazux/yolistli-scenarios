@@ -65,3 +65,6 @@ yarn.lock
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+# Test babylon model
+src/local-test/model/*.*
