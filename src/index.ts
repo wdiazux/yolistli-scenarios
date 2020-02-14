@@ -73,6 +73,8 @@ export class Init {
 
         const defaultCamera = scene.activeCamera
 
+        if (this._mode !== '') this._mode = `.${this._mode}`
+
         let dlCount = 0
         SceneLoader.Append(
             this._location + '/',
