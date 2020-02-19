@@ -208,6 +208,9 @@ export class Init {
             // create overlay
             this.createOverlay()
 
+            // create vrHelper
+            this.createVRHelper()
+
             // the canvas/window resize event handler
             window.addEventListener('resize', () => {
                 this._engine.resize()
@@ -259,6 +262,30 @@ export class Init {
     private hideOverlay = () => {
         const overlay: HTMLElement = document.querySelector('#scene-overlay')
         if (overlay) overlay.style.display = 'none'
+    }
+
+    private createVRHelper = () => {
+        if (
+            this._vrHelper &&
+            (this._scene.activeCamera instanceof WebVRFreeCamera ||
+                this._scene.activeCamera instanceof DeviceOrientationCamera)
+        ) {
+            return
+        }
+
+        const button = document.querySelector('#vr-btn') as HTMLButtonElement
+
+        if (button) {
+            this._vrHelper = this._scene.createDefaultVRExperience({
+                useCustomVRButton: true,
+                customVRButton: button,
+                createDeviceOrientationCamera: false,
+            })
+        } else {
+            this._vrHelper = this._scene.createDefaultVRExperience({
+                createDeviceOrientationCamera: false,
+            })
+        }
     }
 
     private createPanel = () => {
@@ -365,30 +392,12 @@ export class Init {
 
         // VR button camera
         vrBtn.addEventListener('click', () => {
-            if (!this._scene) return
+            if (!this._scene || !this._vrHelper) return
 
-            if (
-                this._vrHelper &&
-                (this._scene.activeCamera instanceof WebVRFreeCamera ||
-                    this._scene.activeCamera instanceof DeviceOrientationCamera)
-            ) {
-                return
-            }
-
-            const button = document.querySelector(
-                '#vr-btn'
-            ) as HTMLButtonElement
-
-            this._vrHelper = this._scene.createDefaultVRExperience({
-                useCustomVRButton: true,
-                customVRButton: button,
-                createDeviceOrientationCamera: false,
-            })
             this._vrHelper.enterVR()
 
             this._vrHelper.onAfterEnteringVRObservable.add(() => {
                 console.log(this._scene.activeCamera)
-                console.log(this._vrHelper.vrDeviceOrientationCamera)
                 if (
                     this._scene.activeCamera ===
                         this._vrHelper.vrDeviceOrientationCamera &&
