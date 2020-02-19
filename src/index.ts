@@ -7,8 +7,11 @@ import {
     UniversalCamera,
     VirtualJoysticksCamera,
     StandardMaterial,
-    VRDeviceOrientationFreeCamera,
+    WebVRFreeCamera,
+    DeviceOrientationCamera,
+    FreeCameraDeviceOrientationInput,
     Nullable,
+    VRExperienceHelper,
 } from 'babylonjs'
 import 'babylonjs-loaders'
 import 'babylonjs-inspector'
@@ -18,7 +21,10 @@ import { MDCRipple } from '@material/ripple'
 import './styles/style.scss'
 
 type Cameras = Nullable<
-    UniversalCamera | VirtualJoysticksCamera | VRDeviceOrientationFreeCamera
+    | UniversalCamera
+    | VirtualJoysticksCamera
+    | DeviceOrientationCamera
+    | WebVRFreeCamera
 >
 
 export class Init {
@@ -36,6 +42,7 @@ export class Init {
     private _callback: () => void
     private _sceneChecked: boolean
     private _debug: boolean
+    private _vrHelper: VRExperienceHelper
 
     constructor(
         canvasElement: string,
@@ -361,21 +368,55 @@ export class Init {
             if (!this._scene) return
 
             if (
-                this._scene.activeCamera instanceof
-                VRDeviceOrientationFreeCamera
+                this._vrHelper &&
+                (this._scene.activeCamera instanceof WebVRFreeCamera ||
+                    this._scene.activeCamera instanceof DeviceOrientationCamera)
             ) {
                 return
             }
 
-            const camera = new VRDeviceOrientationFreeCamera(
-                'deviceOrientationCamera',
-                this._scene.activeCamera.position,
-                this._scene
-            )
+            const button = document.querySelector(
+                '#vr-btn'
+            ) as HTMLButtonElement
+
+            this._vrHelper = this._scene.createDefaultVRExperience({
+                useCustomVRButton: true,
+                customVRButton: button,
+                createDeviceOrientationCamera: false,
+            })
+            this._vrHelper.enterVR()
+
+            this._vrHelper.onAfterEnteringVRObservable.add(() => {
+                console.log(this._scene.activeCamera)
+                console.log(this._vrHelper.vrDeviceOrientationCamera)
+                if (
+                    this._scene.activeCamera ===
+                        this._vrHelper.vrDeviceOrientationCamera &&
+                    'WaitForOrientationChangeAsync' in
+                        FreeCameraDeviceOrientationInput
+                ) {
+                    ;(FreeCameraDeviceOrientationInput as any)
+                        .WaitForOrientationChangeAsync(1000)
+                        .then(() => {
+                            console.log(this._vrHelper)
+                            // Successfully received sensor input
+                            this._vrHelper.enableTeleportation({
+                                floorMeshName: 'Ground',
+                            })
+                        })
+                        .catch(() => {
+                            alert(
+                                'Device orientation camera is being used but no sensor is found'
+                            )
+                            this._vrHelper.enableTeleportation({
+                                floorMeshName: 'Ground',
+                            })
+                        })
+                }
+            })
 
             this.hideOverlay()
             this.hideCameraPanel()
-            this.switchCamera(camera)
         })
 
         // open debug mode
