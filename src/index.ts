@@ -26,7 +26,6 @@ type Cameras = Nullable<
     | DeviceOrientationCamera
     | WebVRFreeCamera
 >
-
 export class Init {
     private _canvas: Nullable<HTMLCanvasElement>
     private _engine: Nullable<Engine>
@@ -59,7 +58,9 @@ export class Init {
         this._canvas = document.getElementById(
             canvasElement
         ) as HTMLCanvasElement
-        this._engine = new Engine(this._canvas, true)
+        this._engine = new Engine(this._canvas, true, {
+            disableWebGL2Support: true,
+        })
         this._name = name
         this._location = location
         this._mode = mode || ''
@@ -414,12 +415,12 @@ export class Init {
                             })
                         })
                         .catch(() => {
-                            alert(
-                                'Device orientation camera is being used but no sensor is found'
-                            )
                             this._vrHelper.enableTeleportation({
                                 floorMeshName: 'Ground',
                             })
+                            alert(
+                                'Device orientation camera is being used but no sensor is found'
+                            )
                         })
                 }
             })
