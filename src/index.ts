@@ -190,6 +190,7 @@ export class Init {
         if (this._scene) {
             // run the render loop
             this._engine.runRenderLoop(() => {
+                this._engine.performanceMonitor.enable()
                 this._scene.render()
             })
 
@@ -398,7 +399,6 @@ export class Init {
             this._vrHelper.enterVR()
 
             this._vrHelper.onAfterEnteringVRObservable.add(() => {
-                console.log(this._scene.activeCamera)
                 if (
                     this._scene.activeCamera ===
                         this._vrHelper.vrDeviceOrientationCamera &&
@@ -408,7 +408,6 @@ export class Init {
                     ;(FreeCameraDeviceOrientationInput as any)
                         .WaitForOrientationChangeAsync(1000)
                         .then(() => {
-                            console.log(this._vrHelper)
                             // Successfully received sensor input
                             this._vrHelper.enableTeleportation({
                                 floorMeshName: 'Ground',
