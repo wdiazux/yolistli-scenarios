@@ -1,0 +1,32 @@
+{
+    "name": "cihuatan",
+    "location": "https://wdiaz.org:8081/scenarios/cihuatan",
+    "mode": "",
+    "collision": true,
+    "startPoint": [-11, 4, -20],
+    "startRotation": [0.0875154361, 2.88880157, 0],
+    "offline": true,
+    "portals": [
+        {
+            "name": "portal1",
+            "description": "Estes el portal 1",
+            "meshName": "portal1",
+            "portalScene": "portal1.babylonjs",
+            "portalLocation": "https://wdiaz.org:8081/scenarios/cihuatan/"
+        },
+        {
+            "name": "portal2",
+            "description": "Estes el portal 2",
+            "meshName": "portal2",
+            "portalScene": "portal1.babylonjs",
+            "portalLocation": "https://wdiaz.org:8081/scenarios/cihuatan/"
+        },
+        {
+            "name": "portal3",
+            "description": "Estes el portal 3",
+            "meshName": "portal3",
+            "portalScene": "portal1.babylonjs",
+            "portalLocation": "https://wdiaz.org:8081/scenarios/cihuatan/"
+        }
+    ]
+}

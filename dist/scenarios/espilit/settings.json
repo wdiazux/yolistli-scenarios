@@ -1,0 +1,9 @@
+{
+    "name": "espilit",
+    "location": "https://www.babylonjs.com/scenes/espilit",
+    "mode": "incremental",
+    "collision": true,
+    "startPoint": [-10.3257151, 1.80449986, 9.445365],
+    "startRotation": [0.0875154361, 2.88880157, 0],
+    "offline": true
+}

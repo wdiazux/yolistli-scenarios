@@ -2,7 +2,6 @@ const path = require('path')
 const CopyPlugin = require('copy-webpack-plugin')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const MiniCssExtractPlugin = require('mini-css-extract-plugin')
-const { CleanWebpackPlugin } = require('clean-webpack-plugin')
 
 const { prodPath, srcPath } = require('./path')
 
@@ -12,7 +11,7 @@ module.exports = {
         extensions: ['.ts', '.js'],
     },
     output: {
-        path: path.resolve(__dirname, prodPath),
+        path: path.join(__dirname, prodPath, 'libs'),
         filename: 'yolistli.js',
         library: 'Yolistli',
         libraryTarget: 'umd',
@@ -63,7 +62,6 @@ module.exports = {
         ],
     },
     plugins: [
-        new CleanWebpackPlugin(),
         new MiniCssExtractPlugin({
             filename: 'yolistli.css',
         }),
@@ -78,7 +76,7 @@ module.exports = {
             inject: false,
             hash: true,
             template: './' + srcPath + '/index.html',
-            filename: 'index.html',
+            filename: '../index.html',
         }),
     ],
 }
