@@ -57,6 +57,9 @@ typings/
 # Mac files
 .DS_Store
 
+# IDEA
+.idea
+
 # Yarn
 yarn-error.log
 yarn.lock

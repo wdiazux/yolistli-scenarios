@@ -410,28 +410,10 @@ export class Init {
             this._vrHelper.enterVR()
 
             this._vrHelper.onAfterEnteringVRObservable.add(() => {
-                if (
-                    this._scene.activeCamera ===
-                        this._vrHelper.vrDeviceOrientationCamera &&
-                    'WaitForOrientationChangeAsync' in
-                        FreeCameraDeviceOrientationInput
-                ) {
-                    ;(FreeCameraDeviceOrientationInput as any)
-                        .WaitForOrientationChangeAsync(1000)
-                        .then(() => {
-                            // Successfully received sensor input
-                            this._vrHelper.enableTeleportation({
-                                floorMeshName: 'Ground',
-                            })
-                        })
-                        .catch(() => {
-                            this._vrHelper.enableTeleportation({
-                                floorMeshName: 'Ground',
-                            })
-                            alert(
-                                'Device orientation camera is being used but no sensor is found'
-                            )
-                        })
+                if (this._scene.activeCamera === this._vrHelper.webVRCamera) {
+                    this._vrHelper.enableTeleportation({
+                        floorMeshName: 'Ground',
+                    })
                 }
             })
 
