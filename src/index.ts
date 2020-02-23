@@ -68,9 +68,9 @@ export class Init {
         this._location = location
         this._mode = mode || ''
         this._collision = collision || true
-        this._ground = ground
         this._spoint = startPoint || [0, 1.8, 0]
         this._srotation = startRotation || [0, 0, 0]
+        this._ground = ground
         this._offline = offline || false
         this._callback = callback
         this._sceneChecked = false
@@ -412,6 +412,7 @@ export class Init {
 
             this._vrHelper.enterVR()
 
+            console.log(this._ground)
             this._vrHelper.onAfterEnteringVRObservable.add(() => {
                 if (
                     this._scene.activeCamera === this._vrHelper.webVRCamera &&

@@ -9,6 +9,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 response.data.mode,
                 response.data.startPoint,
                 response.data.startRotation,
+                response.data.collision,
                 response.data.ground,
                 response.data.offline
             )
