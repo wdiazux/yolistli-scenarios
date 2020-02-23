@@ -38,6 +38,7 @@ export class Init {
     private _spoint: number[]
     private _srotation: number[]
     private _collision: boolean
+    private _ground: string
     private _offline: boolean
     private _callback: () => void
     private _sceneChecked: boolean
@@ -52,6 +53,7 @@ export class Init {
         startPoint?: number[],
         startRotation?: number[],
         collision?: boolean,
+        ground?: string,
         offline?: boolean,
         callback?: () => void
     ) {
@@ -66,6 +68,7 @@ export class Init {
         this._location = location
         this._mode = mode || ''
         this._collision = collision || true
+        this._ground = ground
         this._spoint = startPoint || [0, 1.8, 0]
         this._srotation = startRotation || [0, 0, 0]
         this._offline = offline || false
@@ -410,9 +413,12 @@ export class Init {
             this._vrHelper.enterVR()
 
             this._vrHelper.onAfterEnteringVRObservable.add(() => {
-                if (this._scene.activeCamera === this._vrHelper.webVRCamera) {
+                if (
+                    this._scene.activeCamera === this._vrHelper.webVRCamera &&
+                    this._ground
+                ) {
                     this._vrHelper.enableTeleportation({
-                        floorMeshName: 'Ground',
+                        floorMeshName: this._ground,
                     })
                 }
             })
