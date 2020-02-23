@@ -10,7 +10,6 @@ import {
     StandardMaterial,
     WebVRFreeCamera,
     DeviceOrientationCamera,
-    FreeCameraDeviceOrientationInput,
     Nullable,
     VRExperienceHelper,
 } from 'babylonjs'
@@ -226,6 +225,9 @@ export class Init {
             // create overlay
             this.createOverlay()
 
+            // delete loader
+            this.removeLoader()
+
             // create vrHelper
             this.createVRHelper()
 
@@ -266,6 +268,13 @@ export class Init {
         this._scene.activeCamera = camera
 
         this._scene.activeCamera.attachControl(this._canvas)
+    }
+
+    private removeLoader = () => {
+        const loaderContainer = document.querySelector('.loader-container')
+        if (!loaderContainer) return
+
+        loaderContainer.parentNode.removeChild(loaderContainer)
     }
 
     private createOverlay = () => {
