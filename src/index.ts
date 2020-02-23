@@ -343,10 +343,10 @@ export class Init {
         const isMobile = uaParser.getDevice().type
 
         if (isMobile === 'mobile' || isMobile === 'tablet') {
-            deskBtn.style.display = 'none'
-            debugBtn.style.display = 'none'
+            if (deskBtn) deskBtn.style.display = 'none'
+            if (debugBtn) debugBtn.style.display = 'none'
         } else {
-            mobBtn.style.display = 'none'
+            if (mobBtn) mobBtn.style.display = 'none'
         }
 
         // listeners for buttons
