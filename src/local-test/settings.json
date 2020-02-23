@@ -4,7 +4,7 @@
     "mode": "",
     "collision": true,
     "ground": "Ground",
-    "startPoint": [-11, 4, -20],
+    "startPoint": [65.7, 16.4, -22.66],
     "startRotation": [0.0875154361, 2.88880157, 0],
     "offline": true,
     "portals": [
