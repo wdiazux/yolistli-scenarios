@@ -3,7 +3,7 @@
     "location": "https://wdiaz.org:8081/scenarios/cihuatan",
     "mode": "",
     "collision": true,
-    "ground": "Landscape",
+    "ground": "Navmesh",
     "startPoint": [65.7, 16.4, -22.66],
     "startRotation": [0.0875154361, 2.88880157, 0],
     "offline": true,
