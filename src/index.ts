@@ -43,6 +43,7 @@ export class Init {
     private _sceneChecked: boolean
     private _debug: boolean
     private _vrHelper: VRExperienceHelper
+    private _isMobile: boolean
 
     constructor(
         canvasElement: string,
@@ -72,6 +73,7 @@ export class Init {
         this._callback = callback
         this._sceneChecked = false
         this._debug = true
+        this._isMobile = false
     }
 
     private loadScene = (callback: () => void): void => {
@@ -341,9 +343,11 @@ export class Init {
 
         // detect device and browser
         const uaParser = new UAParser()
-        const isMobile = uaParser.getDevice().type
+        this._isMobile =
+            uaParser.getDevice().type === 'mobile' ||
+            uaParser.getDevice().type === 'tablet'
 
-        if (isMobile === 'mobile' || isMobile === 'tablet') {
+        if (this._isMobile) {
             if (deskBtn) deskBtn.style.display = 'none'
             if (debugBtn) debugBtn.style.display = 'none'
         } else {
