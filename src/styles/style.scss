@@ -6,7 +6,9 @@ $roboto-font-path: '~roboto-fontface/fonts';
 @import '@fortawesome/fontawesome-pro/scss/fontawesome';
 @import '@fortawesome/fontawesome-pro/scss/regular';
 
-html,
+html {
+  height: 100%;
+}
 body {
   overflow: hidden;
   width: 100%;
