@@ -43,7 +43,6 @@ export class Init {
     private _sceneChecked: boolean
     private _debug: boolean
     private _vrHelper: VRExperienceHelper
-    private _isMobile: boolean
 
     constructor(
         canvasElement: string,
@@ -73,7 +72,6 @@ export class Init {
         this._callback = callback
         this._sceneChecked = false
         this._debug = true
-        this._isMobile = false
     }
 
     private loadScene = (callback: () => void): void => {
@@ -183,7 +181,11 @@ export class Init {
             const debugBtn: HTMLButtonElement = document.querySelector(
                 '#debug-btn'
             )
-            if (debugBtn) debugBtn.style.opacity = '1'
+            if (debugBtn && this._debug) {
+                debugBtn.style.opacity = '1'
+            } else {
+                debugBtn.parentNode.removeChild(debugBtn)
+            }
 
             if (this._callback) this._callback()
         })
@@ -296,7 +298,16 @@ export class Init {
     private createPanel = () => {
         const container = this._canvas.parentNode
 
-        const buttonElements: DocumentFragment = createFragment(`
+        // detect device and browser
+        const uaParser = new UAParser()
+        const isMobile =
+            uaParser.getDevice().type === 'mobile' ||
+            uaParser.getDevice().type === 'tablet'
+
+        const buttonElements: DocumentFragment = createFragment({
+            id: 'panel',
+            element: 'div',
+            htmlStr: `
             <button id="desk-btn" class="mdc-button mdc-fab--extended mdc-button--raised">
                 <div class="mdc-button__ripple"></div>
                 <span class="mdc-button__label">
@@ -315,17 +326,20 @@ export class Init {
                     <i class="far fa-vr-cardboard"></i> VR Environment
                 </span>
             </button>
-        `)
+        `,
+        })
 
-        const settingBtn = document.createElement('button')
-        settingBtn.id = 'debug-btn'
-        settingBtn.className = 'mdc-button mdc-fab--extended mdc-button--raised'
-        settingBtn.innerHTML = `<div class="mdc-button__ripple"></div>
-        <span class="mdc-button__lable"><i class="far fa-cogs"></i></span>`
+        const settingBtn: DocumentFragment = createFragment({
+            id: 'debug-btn',
+            element: 'button',
+            classElm: 'mdc-button mdc-fab--extended mdc-button--raised',
+            htmlStr: `<div class="mdc-button__ripple"></div>
+            <span class="mdc-button__lable"><i class="far fa-cogs"></i></span>`,
+        })
 
         // add buttons to the canvas container
         container.append(buttonElements)
-        if (this._debug) container.append(settingBtn)
+        container.append(settingBtn)
 
         // ripple effect aka material.io for all buttons
         const buttons = document.querySelectorAll('.mdc-button')
@@ -337,21 +351,13 @@ export class Init {
         const deskBtn: HTMLButtonElement = document.querySelector('#desk-btn')
         const mobBtn: HTMLButtonElement = document.querySelector('#mob-btn')
         const vrBtn: HTMLButtonElement = document.querySelector('#vr-btn')
-        const debugBtn: HTMLButtonElement = document.querySelector(
-            '#debug-button'
-        )
+        const debugBtn: HTMLButtonElement = document.querySelector('#debug-btn')
 
-        // detect device and browser
-        const uaParser = new UAParser()
-        this._isMobile =
-            uaParser.getDevice().type === 'mobile' ||
-            uaParser.getDevice().type === 'tablet'
-
-        if (this._isMobile) {
-            if (deskBtn) deskBtn.style.display = 'none'
-            if (debugBtn) debugBtn.style.display = 'none'
+        if (isMobile) {
+            deskBtn.style.display = 'none'
+            debugBtn.style.display = 'none'
         } else {
-            if (mobBtn) mobBtn.style.display = 'none'
+            mobBtn.style.display = 'none'
         }
 
         // listeners for buttons

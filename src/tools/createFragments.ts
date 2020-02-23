@@ -1,14 +1,24 @@
-const createFragment = (htmlStr: string): DocumentFragment => {
-    htmlStr = htmlStr
+interface Props {
+    id?: string
+    classElm?: string
+    element: string
+    htmlStr: string
+}
+
+const createFragment = (props: Props): DocumentFragment => {
+    const { id, classElm, element, htmlStr } = props
+    const elements = htmlStr
         .replace(/^\s+|\s+$/gm, '')
         .split('\n')
         .join('')
     const frag = document.createDocumentFragment()
-    const panel = document.createElement('div')
+    const docElm: HTMLElement = document.createElement(element)
 
-    panel.id = 'panel'
-    panel.innerHTML = htmlStr
-    frag.appendChild(panel)
+    if (id) docElm.id = id
+    if (classElm) docElm.className = classElm
+
+    docElm.innerHTML = elements
+    frag.appendChild(docElm)
     return frag
 }
 
