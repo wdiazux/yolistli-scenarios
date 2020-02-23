@@ -190,6 +190,14 @@ export class Init {
                 debugBtn.parentNode.removeChild(debugBtn)
             }
 
+            const overlay: HTMLDivElement = document.querySelector(
+                '#scene-overlay'
+            )
+            if (overlay) {
+                overlay.style.opacity = '1'
+                overlay.style.visibility = 'visible'
+            }
+
             if (this._callback) this._callback()
         })
     }
@@ -264,6 +272,7 @@ export class Init {
         const container = this._canvas.parentNode
         const overlay = document.createElement('div')
         overlay.id = 'scene-overlay'
+        overlay.innerHTML = `<div class="scenario-title">${this._name}</div>`
         if (container) {
             container.append(overlay)
         }

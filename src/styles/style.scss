@@ -16,7 +16,7 @@ body {
 }
 
 body {
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: Roboto, Helvetica, Arial, sans-serif;
 }
 
 #renderCanvas {
@@ -72,7 +72,24 @@ body {
     top: 0;
     left: 0;
     z-index: 5;
-    background: rgba(255, 255, 255, 0);
+    background: rgba(0, 0, 0, 0.6);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s linear, visibility 0.3s linear;
+}
+
+.scenario-title {
+    position: absolute;
+    margin: auto;
+    top: 50%;
+    left: 0;
+    right: 0;
+    color: #fff;
+    font-size: 3rem;
+    font-weight: 600;
+    text-align: center;
+    transform: translateY(-50%);
+    text-transform: uppercase;
 }
 
 #debug-btn {
@@ -91,5 +108,11 @@ body {
 
     .mdc-button__ripple {
         border-radius: 50%;
+    }
+}
+
+@media (min-width: 600px) {
+    .scenario-title {
+        font-size: 5rem;
     }
 }
