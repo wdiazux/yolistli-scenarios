@@ -119,7 +119,7 @@ export class Init {
                         }
                     }
 
-                    scene.gravity = new Vector3(0, -0.05, 0)
+                    scene.gravity = new Vector3(0, -0.3, 0)
                     scene.fogMode = Scene.FOGMODE_LINEAR
                     if (this._music && this._music !== '') {
                         const music = new Sound(
@@ -162,8 +162,6 @@ export class Init {
             this._scene
         )
 
-        // this._engine.collisionsEpsilon = 0.001
-
         // camera default settings
         this._camera.rotation = new Vector3(
             this._srotation[0],
@@ -189,7 +187,7 @@ export class Init {
         this._engine.enableOfflineSupport = this._offline
 
         // apply a value to the gravity
-        this._scene.gravity = new Vector3(0, -0.9, 0)
+        this._scene.gravity = new Vector3(0, -0.3, 0)
 
         // load scenario
         this.loadScene(() => {
