@@ -110,6 +110,9 @@ export class Init {
                             ;(scene.activeCamera as any).keysRight.push(68) // D
                         }
                     }
+
+                    scene.gravity = new Vector3(0, -0.05, 0)
+
                     callback()
                 })
             },
@@ -149,7 +152,7 @@ export class Init {
             this._srotation[1],
             this._srotation[2]
         )
-        this._camera.speed = 2
+        this._camera.speed = 1.5
         this._camera.inertia = 0.8
         this._camera.fov = 1.024779
         this._camera.maxZ = 500
