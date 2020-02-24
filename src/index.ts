@@ -141,13 +141,15 @@ export class Init {
             this._scene
         )
 
+        // this._engine.collisionsEpsilon = 0.001
+
         // camera default settings
         this._camera.rotation = new Vector3(
             this._srotation[0],
             this._srotation[1],
             this._srotation[2]
         )
-        this._camera.speed = 0.4
+        this._camera.speed = 2
         this._camera.inertia = 0.8
         this._camera.fov = 1.024779
         this._camera.maxZ = 500
@@ -166,7 +168,7 @@ export class Init {
         this._engine.enableOfflineSupport = this._offline
 
         // apply a value to the gravity
-        this._scene.gravity = new Vector3(0, -0.5, 0)
+        this._scene.gravity = new Vector3(0, -0.9, 0)
 
         // load scenario
         this.loadScene(() => {
