@@ -12,6 +12,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 response.data.collision,
                 response.data.ground,
                 response.data.speed,
+                response.data.music,
                 response.data.offline
             )
 

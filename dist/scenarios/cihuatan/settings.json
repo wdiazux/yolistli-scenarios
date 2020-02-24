@@ -5,6 +5,7 @@
     "collision": true,
     "ground": "Navmesh",
     "speed": 1.1,
+    "music": "background.mp3",
     "startPoint": [65.7, 16.4, -22.66],
     "startRotation": [0.0875154361, 2.88880157, 0],
     "offline": true,

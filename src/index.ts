@@ -12,6 +12,8 @@ import {
     DeviceOrientationCamera,
     Nullable,
     VRExperienceHelper,
+    Sound,
+    AssetContainer,
 } from 'babylonjs'
 import 'babylonjs-loaders'
 import 'babylonjs-inspector'
@@ -39,6 +41,7 @@ export class Init {
     private _collision: boolean
     private _ground: string
     private _speed: number
+    private _music: string
     private _offline: boolean
     private _callback: () => void
     private _sceneChecked: boolean
@@ -55,6 +58,7 @@ export class Init {
         collision?: boolean,
         ground?: string,
         speed?: number,
+        music?: string,
         offline?: boolean,
         callback?: () => void
     ) {
@@ -73,13 +77,14 @@ export class Init {
         this._srotation = startRotation || [0, 0, 0]
         this._ground = ground
         this._speed = speed || 1
+        this._music = music
         this._offline = offline || false
         this._callback = callback
         this._sceneChecked = false
         this._debug = true
     }
 
-    private loadScene = (callback: () => void): void => {
+    private loadScene = (callback: () => void) => {
         const engine = this._engine
         const scene = this._scene
 
@@ -116,6 +121,15 @@ export class Init {
 
                     scene.gravity = new Vector3(0, -0.05, 0)
                     scene.fogMode = Scene.FOGMODE_LINEAR
+                    if (this._music && this._music !== '') {
+                        const music = new Sound(
+                            'MusicBackground',
+                            this._location + '/' + this._music,
+                            scene,
+                            null,
+                            { loop: true, autoplay: true, volume: 0.4 }
+                        )
+                    }
 
                     callback()
                 })
