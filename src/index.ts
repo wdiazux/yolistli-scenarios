@@ -115,6 +115,7 @@ export class Init {
                     }
 
                     scene.gravity = new Vector3(0, -0.05, 0)
+                    scene.fogMode = Scene.FOGMODE_LINEAR
 
                     callback()
                 })
