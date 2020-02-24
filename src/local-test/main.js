@@ -11,6 +11,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 response.data.startRotation,
                 response.data.collision,
                 response.data.ground,
+                response.data.speed,
                 response.data.offline
             )
 

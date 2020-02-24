@@ -38,6 +38,7 @@ export class Init {
     private _srotation: number[]
     private _collision: boolean
     private _ground: string
+    private _speed: number
     private _offline: boolean
     private _callback: () => void
     private _sceneChecked: boolean
@@ -53,6 +54,7 @@ export class Init {
         startRotation?: number[],
         collision?: boolean,
         ground?: string,
+        speed?: number,
         offline?: boolean,
         callback?: () => void
     ) {
@@ -70,6 +72,7 @@ export class Init {
         this._spoint = startPoint || [0, 1.8, 0]
         this._srotation = startRotation || [0, 0, 0]
         this._ground = ground
+        this._speed = speed || 1
         this._offline = offline || false
         this._callback = callback
         this._sceneChecked = false
@@ -152,7 +155,7 @@ export class Init {
             this._srotation[1],
             this._srotation[2]
         )
-        this._camera.speed = 1.5
+        this._camera.speed = this._speed
         this._camera.inertia = 0.8
         this._camera.fov = 1.024779
         this._camera.maxZ = 500
