@@ -1,6 +1,6 @@
 {
   "*.{js,jsx,ts,tsx}": [
-    "prettier --write --single--quote",
+    "prettier --write --single-quote",
     "eslint --fix",
   ],
   "*.scss": [
