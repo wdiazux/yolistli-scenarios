@@ -5,7 +5,8 @@
   "private": true,
   "scripts": {
     "start": "cross-env NODE_ENV=development webpack-dev-server",
-    "build": "rimraf dist/libs/* dist/index.html && cross-env NODE_ENV=production webpack",
+    "local": "cross-env NODE_ENV=development webpack-dev-server --host 192.168.1.150",
+    "build": "rimraf dist/libs/* dist/index.html && cross-env NODE_ENV=production webpack --mode=production",
     "lint": "eslint common/src/** --ext .ts,.tsx",
     "lint:fix": "yarn lint --fix"
   },

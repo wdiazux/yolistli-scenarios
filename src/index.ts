@@ -329,10 +329,8 @@ export class Init {
                 useCustomVRButton: true,
                 customVRButton: button,
                 createDeviceOrientationCamera: false,
-            })
-        } else {
-            this._vrHelper = this._scene.createDefaultVRExperience({
-                createDeviceOrientationCamera: false,
+                createFallbackVRDeviceOrientationFreeCamera: true,
+                useMultiview: true,
             })
         }
     }

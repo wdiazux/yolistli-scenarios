@@ -13,7 +13,10 @@ window.addEventListener('DOMContentLoaded', function() {
                 response.data.ground,
                 response.data.speed,
                 response.data.music,
-                response.data.offline
+                response.data.offline,
+                () => {
+                    console.log(this)
+                }
             )
 
             // Create the scene
