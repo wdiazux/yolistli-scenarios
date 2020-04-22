@@ -54,7 +54,6 @@
     "babylonjs": "4.1.0",
     "babylonjs-gui": "4.1.0",
     "babylonjs-inspector": "4.1.0",
-    "babylonjs-loaders": "4.1.0",
     "cannon": "^0.6.2",
     "core-js": "^3.6.4",
     "normalize.css": "^8.0.1",

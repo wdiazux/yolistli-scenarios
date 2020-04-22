@@ -4,6 +4,7 @@ import {
     Engine,
     Scene,
     Vector3,
+    Color3,
     SceneLoader,
     UniversalCamera,
     VirtualJoysticksCamera,
@@ -13,14 +14,13 @@ import {
     Nullable,
     VRExperienceHelper,
     Sound,
-    AssetContainer,
 } from 'babylonjs'
-import 'babylonjs-loaders'
 import 'babylonjs-inspector'
 import { UAParser } from 'ua-parser-js'
 import createFragment from './tools/createFragments'
 import { MDCRipple } from '@material/ripple'
 import './styles/style.scss'
+import { PBRClearCoatConfiguration } from 'babylonjs/Materials/PBR/pbrClearCoatConfiguration'
 
 type Cameras = Nullable<
     | UniversalCamera
@@ -120,7 +120,28 @@ export class Init {
                     }
 
                     scene.gravity = new Vector3(0, -0.3, 0)
-                    scene.fogMode = Scene.FOGMODE_LINEAR
+                    //scene.fogMode = Scene.FOGMODE_LINEAR
+
+                    scene.getMeshByID('hdrSkyBox').position = new Vector3(
+                        0,
+                        -15,
+                        0
+                    )
+                    scene.getMeshByID('hdrSkyBox').scaling = new Vector3(
+                        2.5,
+                        2.5,
+                        2.5
+                    )
+                    scene.environmentIntensity = 0.75
+                    scene.fogMode = 3
+                    scene.fogColor = new Color3(0, 0.5019607843137255, 1)
+                    scene.fogStart = 150
+                    scene.imageProcessingConfiguration.contrast = 1.3
+                    scene.imageProcessingConfiguration.exposure = 0.8
+                    scene.imageProcessingConfiguration.toneMappingEnabled = true
+                    scene.imageProcessingConfiguration.vignetteWeight = 1.3
+                    scene.imageProcessingConfiguration.vignetteCameraFov = 0.6
+
                     if (this._music && this._music !== '') {
                         const music = new Sound(
                             'MusicBackground',
