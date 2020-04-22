@@ -122,17 +122,6 @@ export class Init {
 
                     scene.gravity = new Vector3(0, -0.3, 0)
                     //scene.fogMode = Scene.FOGMODE_LINEAR
-
-                    scene.getMeshByID('hdrSkyBox').position = new Vector3(
-                        0,
-                        -15,
-                        0
-                    )
-                    scene.getMeshByID('hdrSkyBox').scaling = new Vector3(
-                        2.5,
-                        2.5,
-                        2.5
-                    )
                     scene.environmentIntensity = 0.75
                     scene.fogMode = 3
                     scene.fogColor = new Color3(0, 0.5019607843137255, 1)
