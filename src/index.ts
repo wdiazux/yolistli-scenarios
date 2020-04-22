@@ -14,6 +14,7 @@ import {
     Nullable,
     VRExperienceHelper,
     Sound,
+    ImageProcessingPostProcess,
 } from 'babylonjs'
 import 'babylonjs-inspector'
 import { UAParser } from 'ua-parser-js'
@@ -136,11 +137,16 @@ export class Init {
                     scene.fogMode = 3
                     scene.fogColor = new Color3(0, 0.5019607843137255, 1)
                     scene.fogStart = 150
-                    scene.imageProcessingConfiguration.contrast = 1.3
-                    scene.imageProcessingConfiguration.exposure = 0.8
-                    scene.imageProcessingConfiguration.toneMappingEnabled = true
-                    scene.imageProcessingConfiguration.vignetteWeight = 1.3
-                    scene.imageProcessingConfiguration.vignetteCameraFov = 0.6
+                    const postProcess = new ImageProcessingPostProcess(
+                        'processing',
+                        1.0,
+                        scene.activeCamera
+                    )
+                    postProcess.contrast = 1.3
+                    postProcess.exposure = 0.8
+                    postProcess.toneMappingEnabled = true
+                    postProcess.vignetteWeight = 1.3
+                    postProcess.vignetteCameraFov = 0.6
 
                     if (this._music && this._music !== '') {
                         const music = new Sound(
