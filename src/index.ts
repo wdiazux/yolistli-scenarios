@@ -144,7 +144,17 @@ export class Init {
                             -15,
                             0
                         )
+                        scene.getMeshByUniqueID(575).position = new Vector3(
+                            0,
+                            -15,
+                            0
+                        )
                         scene.getMeshByID('hdrSkyBox').scaling = new Vector3(
+                            2.5,
+                            2.5,
+                            2.5
+                        )
+                        scene.getMeshByUniqueID(575).scaling = new Vector3(
                             2.5,
                             2.5,
                             2.5
