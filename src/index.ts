@@ -124,18 +124,32 @@ export class Init {
                     //scene.fogMode = Scene.FOGMODE_LINEAR
                     scene.environmentIntensity = 0.75
                     scene.fogMode = 3
-                    scene.fogColor = new Color3(0, 0.5019607843137255, 1)
-                    scene.fogStart = 150
-                    const postProcess = new ImageProcessingPostProcess(
-                        'processing',
-                        1.0,
-                        scene.activeCamera
-                    )
-                    postProcess.contrast = 1.3
-                    postProcess.exposure = 0.8
-                    postProcess.toneMappingEnabled = true
-                    postProcess.vignetteWeight = 1.3
-                    postProcess.vignetteCameraFov = 0.6
+
+                    if (this._name === 'cihuatan') {
+                        scene.fogColor = new Color3(0, 0.5019607843137255, 1)
+                        scene.fogStart = 150
+                        const postProcess = new ImageProcessingPostProcess(
+                            'processing',
+                            1.0,
+                            scene.activeCamera
+                        )
+                        postProcess.contrast = 1.2
+                        postProcess.exposure = 0.9
+                        postProcess.toneMappingEnabled = true
+                        postProcess.vignetteWeight = 1.3
+                        postProcess.vignetteCameraFov = 0.6
+
+                        scene.getMeshByID('hdrSkyBox').position = new Vector3(
+                            0,
+                            -15,
+                            0
+                        )
+                        scene.getMeshByID('hdrSkyBox').scaling = new Vector3(
+                            2.5,
+                            2.5,
+                            2.5
+                        )
+                    }
 
                     if (this._music && this._music !== '') {
                         const music = new Sound(
