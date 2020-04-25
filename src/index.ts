@@ -135,7 +135,7 @@ export class Init {
                         )
                         postProcess.contrast = 1.2
                         postProcess.exposure = 0.9
-                        postProcess.toneMappingEnabled = true
+                        postProcess.toneMappingEnabled = false
                         postProcess.vignetteWeight = 1.3
                         postProcess.vignetteCameraFov = 0.6
 
