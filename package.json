@@ -15,7 +15,7 @@
   },
   "license": "SEE LICENSE IN LICENSE.md",
   "devDependencies": {
-    "@babel/core": "^7.8.6",
+    "@babel/core": "^7.9.0",
     "@fortawesome/fontawesome-pro": "^5.13.0",
     "@material/button": "^4.0.0",
     "@types/ua-parser-js": "^0.7.33",
